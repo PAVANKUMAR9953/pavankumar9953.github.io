@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>B Pavan Kumar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a single column on graph paper, like a lab notebook. Sections are ruled entries with a mono margin label. */
+:root {
+  --bg: #F8F2F8;
+  --surface: #FFFFFF;
+  --fg: #1D1422;
+  --muted: #6A5C73;
+  --line: #E2D4E8;
+  --grid: rgba(200, 24, 108, 0.06);
+  --accent: #C8186C;
+  --accent-soft: #FBE2EE;
+  --alt: #0B7A75;
+  --alt-soft: #D9F2EF;
+  --on-accent: #FFFFFF;
+  --ok: #0B7A75;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #150F1A; --surface: #1F1626; --fg: #F4EDF7; --muted: #B6A8BF; --line: #38293F;
+    --grid: rgba(255, 111, 174, 0.07); --accent: #FF6FAE; --accent-soft: #3B1C2F; --alt: #4FD8C4; --alt-soft: #11302D; --on-accent: #1A0F16; --ok: #4FD8C4;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #150F1A; --surface: #1F1626; --fg: #F4EDF7; --muted: #B6A8BF; --line: #38293F;
+  --grid: rgba(255, 111, 174, 0.07); --accent: #FF6FAE; --accent-soft: #3B1C2F; --alt: #4FD8C4; --alt-soft: #11302D; --on-accent: #1A0F16; --ok: #4FD8C4;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-block: 0 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 920px; margin-inline: auto; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.1; margin: 0; }
+p { margin: 0; }
+
+.bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 20px; }
+.bar .mark { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--fg); text-decoration: none; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 14px; }
+.bar nav a { color: var(--muted); text-decoration: none; padding-block: 4px; }
+.bar nav a:hover { color: var(--accent); }
+
+.hero { padding-block: 56px 64px; display: grid; gap: 28px; }
+.status { display: inline-flex; align-items: center; gap: 8px; width: fit-content; font-family: var(--mono); font-size: 13px; color: var(--muted); border: 1px solid var(--line); background: var(--surface); padding: 6px 12px; border-radius: 999px; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); display: inline-block; flex: none; }
+.hero h1 { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 700; letter-spacing: -0.03em; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero .lede { font-size: clamp(1.05rem, 2.4vw, 1.3rem); max-width: 34em; color: var(--muted); }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font: 600 15px var(--body); padding: 12px 20px; border-radius: 8px; text-decoration: none; cursor: pointer; border: 1px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--on-accent); }
+.btn.ghost { background: var(--surface); color: var(--accent); }
+.btn:hover { filter: brightness(1.08); }
+
+section { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 16px 32px; padding-block: 40px; border-top: 1px solid var(--line); }
+.label { font-family: var(--mono); font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); padding-top: 6px; }
+.content { min-width: 0; display: grid; gap: 24px; }
+section h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: -0.02em; }
+.about p { max-width: 38em; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.fact b { display: block; font-family: var(--display); font-size: 1.4rem; }
+.fact span { font-size: 13px; color: var(--muted); }
+
+.project { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: grid; gap: 14px; }
+.project header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
+.project h3 { font-size: 1.45rem; letter-spacing: -0.01em; }
+.project .meta { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+.project ul.points { margin: 0; padding-left: 20px; color: var(--muted); max-width: 46em; display: grid; gap: 6px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.tags li { font-family: var(--mono); font-size: 12.5px; background: var(--alt-soft); color: var(--alt); padding: 3px 10px; border-radius: 6px; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+.skills h3 { font-family: var(--mono); font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 10px; }
+
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; border-left: 2px solid var(--line); }
+.timeline li { padding-left: 22px; position: relative; display: grid; gap: 2px; }
+.timeline li::before { content: ""; position: absolute; left: -7px; top: 8px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.timeline .when { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.timeline strong { font-family: var(--display); font-size: 1.15rem; line-height: 1.3; }
+.timeline .sub { color: var(--muted); }
+.timeline .cred { font-family: var(--mono); font-size: 12.5px; color: var(--muted); overflow-wrap: anywhere; }
+
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.mail code { font-family: var(--mono); font-size: clamp(0.95rem, 3.4vw, 1.2rem); background: var(--surface); border: 1px solid var(--line); padding: 10px 14px; border-radius: 8px; overflow-wrap: anywhere; user-select: all; }
+.mail button { font: 500 14px var(--body); background: var(--surface); color: var(--accent); border: 1px solid var(--line); padding: 10px 14px; border-radius: 8px; cursor: pointer; }
+.socials { display: flex; flex-wrap: wrap; gap: 8px 22px; font-weight: 600; }
+
+footer { border-top: 1px solid var(--line); padding-top: 20px; font-family: var(--mono); font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+@media (max-width: 720px) {
+  section { grid-template-columns: minmax(0, 1fr); gap: 10px; padding-block: 32px; }
+  .label { padding-top: 0; }
+  .hero { padding-block: 32px 44px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="bar">
+    <a class="mark" href="#top">~/pavan-kumar</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Project</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <header class="hero" id="top">
+    <p class="status"><i></i> Python Developer · AI &amp; ML Undergraduate</p>
+    <h1>Hi, I'm <em>B Pavan Kumar</em>. I train models that spot threats early.</h1>
+    <p class="lede">I build machine learning projects for prediction, classification and cybersecurity threat detection, using real-world datasets.</p>
+    <div class="actions">
+      <a class="btn primary" href="#projects">See my project</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+  </header>
+
+  <section id="about" class="about">
+    <div class="label">About</div>
+    <div class="content">
+      <h2>Practical, data-driven work.</h2>
+      <p>I'm an AI and ML undergraduate with hands-on experience in Python, Scikit-learn, data preprocessing, model development and performance evaluation. I have strong analytical and problem-solving skills, and I focus on practical solutions built from data.</p>
+      <div class="facts">
+        <div class="fact"><b>B.Tech 2027</b><span>SITAMS, Chittoor</span></div>
+        <div class="fact"><b>GPA 7.0</b><span>current</span></div>
+        <div class="fact"><b>3</b><span>certifications, 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="label">Project</div>
+    <div class="content">
+      <h2>Selected work</h2>
+      <article class="project">
+        <header><h3>AI-Powered Space Ground Station Security Monitoring Platform</h3><span class="meta">2026</span></header>
+        <ul class="points">
+          <li>Built an AI-based system to monitor satellite ground-station network activity.</li>
+          <li>Collected and preprocessed network traffic datasets, then trained and evaluated a machine learning model to classify normal and malicious traffic.</li>
+          <li>Integrated the model with FastAPI for real-time attack prediction and security alerts.</li>
+        </ul>
+        <ul class="tags"><li>Python</li><li>Machine Learning</li><li>FastAPI</li><li>Cybersecurity</li></ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="label">Skills</div>
+    <div class="content">
+      <h2>What I work with</h2>
+      <div class="skills">
+        <div><h3>Programming languages</h3><ul class="tags"><li>Python</li><li>C</li></ul></div>
+        <div><h3>Machine learning</h3><ul class="tags"><li>Supervised learning</li><li>Unsupervised learning</li><li>Classification</li><li>Regression</li><li>Model evaluation</li></ul></div>
+        <div><h3>Data science</h3><ul class="tags"><li>Data preprocessing</li><li>Feature engineering</li><li>EDA</li></ul></div>
+        <div><h3>Databases</h3><ul class="tags"><li>SQL</li><li>MySQL</li></ul></div>
+        <div><h3>Frameworks and libraries</h3><ul class="tags"><li>Scikit-learn</li><li>FastAPI</li></ul></div>
+        <div><h3>Tools</h3><ul class="tags"><li>Git</li><li>GitHub</li><li>Jupyter Notebook</li><li>Google Colab</li><li>VS Code</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="label">Education</div>
+    <div class="content">
+      <h2>Where I study</h2>
+      <ul class="timeline">
+        <li>
+          <span class="when">2023 – 2027</span>
+          <strong>Bachelor of Technology (B.Tech)</strong>
+          <span class="sub">Sreenivasa Institute of Technology and Management Studies (SITAMS), Chittoor, Andhra Pradesh</span>
+          <span class="sub">GPA 7.0</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="certifications">
+    <div class="label">Certifications</div>
+    <div class="content">
+      <h2>Courses completed</h2>
+      <ul class="timeline">
+        <li>
+          <span class="when">August 2026</span>
+          <strong>Defence and Space Technologies</strong>
+          <span class="sub">BSERC</span>
+          <span class="cred">Credential ID: BSERC-DSI-2026-2520</span>
+        </li>
+        <li>
+          <span class="when">May 2026</span>
+          <strong>Introduction to Generative AI</strong>
+          <span class="sub">Amazon Web Services</span>
+        </li>
+        <li>
+          <span class="when">May 2026</span>
+          <strong>Fundamentals of Machine Learning and Artificial Intelligence</strong>
+          <span class="sub">Amazon Web Services</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="label">Contact</div>
+    <div class="content">
+      <h2>Let's talk.</h2>
+      <p>Based in Chittoor, Andhra Pradesh, India.</p>
+      <div class="mail">
+        <code id="email">pavankumar970422@gmail.com</code>
+        <button type="button" id="copy">Copy email</button>
+      </div>
+      <div class="socials">
+        <a href="https://github.com/PAVANKUMAR9953" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/b-pavan-kumar-55a94a3b6" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>B Pavan Kumar · Chittoor, India</span>
+    <span>Updated Nov 2026</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById("copy");
+  var email = document.getElementById("email");
+  btn.addEventListener("click", function () {
+    function done() { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy email"; }, 1600); }
+    function fallback() {
+      try {
+        var r = document.createRange(); r.selectNodeContents(email);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = "Selected";
+      } catch (e) {}
+    }
+    try {
+      navigator.clipboard.writeText(email.textContent).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
